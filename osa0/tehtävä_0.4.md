@@ -21,6 +21,8 @@ sequenceDiagram
     
     selain->>palvelin: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     palvelin-->>selain: Palvelin palauttaa JavaScript-tiedoston
+    Note right of selain: Selain alkaa toteuttamaan JavaScript-koodia, joka hakee JSON-muotoisen tiedon palvelimelta    
     
     selain->>palvelin: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     palvelin-->>selain: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    Note right of selain: Selain toteuttaa takaisinkutsufunktion, joka renderöi haetut muistiinpanot 
