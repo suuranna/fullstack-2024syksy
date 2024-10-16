@@ -1,5 +1,5 @@
 # fullstack-2024syksy
 
-1. osa:
-x tehtävää
-y tuntia
+0. osa:
+6 tehtävää
+3 tuntia
