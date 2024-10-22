@@ -18,7 +18,16 @@ const Statistics = ({good, bad, neutral}) => {
     }
     return (good / all) * 100
   }
-  
+
+  if (good + bad + neutral == 0) {
+    return (
+      <div> 
+        <h1>statistics</h1>
+        <p>No feedbacks given</p> 
+      </div>
+    )
+  }
+
   return (
      <div>
       <h1>statistics</h1>
