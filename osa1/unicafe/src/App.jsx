@@ -6,7 +6,23 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const countAverage = () => {
+    const all = good + bad + neutral
+    if (all == 0) {
+      return 0
+    }
+    else {
+      return (good * 1 + bad * (-1) + neutral * 0) / all 
+    }
+  }
 
+  const countPositive = () => {
+    const all = good + bad + neutral
+    if (all == 0) {
+      return 0
+    }
+    return (good / all) * 100
+  }
 
   return (
     <div>
@@ -20,6 +36,12 @@ const App = () => {
       neutral {neutral}
       <br/>
       bad {bad}
+      <br/>
+      all {good + neutral + bad}
+      <br/>
+      average {countAverage()}
+      <br/>
+      positive {countPositive()}%
     </div>
   )
 }
