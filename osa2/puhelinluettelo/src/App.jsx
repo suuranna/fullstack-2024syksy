@@ -12,8 +12,13 @@ const App = () => {
 
   const handleNameAdding = (event) => {
     event.preventDefault()
-    const nameObject = { name: newName}
-    setPersons(persons.concat(nameObject))
+    const nameObject = { name: newName }
+    if (persons.find(person => person.name === newName) === undefined) {
+      setPersons(persons.concat(nameObject))
+      setNewName('')
+    } else {
+      alert(`${newName} is already added to phonebook`)
+    }
   }
 
   const numbers = persons.map(person =>
