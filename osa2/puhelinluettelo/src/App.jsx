@@ -82,6 +82,8 @@ const App = () => {
     const nameObject = { name: newName, number: newNumber }
     if (persons.find(person => person.name === newName) === undefined) {
       setPersons(persons.concat(nameObject))
+      axios
+        .post('http://localhost:3001/persons', nameObject)
       setNewName('')
       setNewNumber('')
     } else {
