@@ -14,4 +14,10 @@ const deleteOne = (id) => {
     return axios.delete(url)
 }
 
-export default { getAll, create, deleteOne }
+const update = (nameObject) => {
+    const url = baseUrl + "/" + nameObject.id
+    const request = axios.put(url, nameObject)
+    return request.then(response => response.data)
+}
+
+export default { getAll, create, deleteOne, update }

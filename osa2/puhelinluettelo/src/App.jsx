@@ -88,7 +88,21 @@ const App = () => {
           setNewNumber('')
         })
     } else {
-      alert(`${newName} is already added to phonebook`)
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const oldPerson = persons.find(person => person.name === newName)
+        const changedPerson = { ...oldPerson, number: newNumber }
+        personService
+          .update(changedPerson)
+          .then(response => {
+            personService
+            .getAll()
+            .then(response => {
+              setPersons(response.data)
+              setNewName('')
+              setNewNumber('')
+            })
+          })
+      }
     }
   }
 
