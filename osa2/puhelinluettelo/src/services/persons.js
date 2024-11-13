@@ -9,4 +9,9 @@ const create = nameObject => {
     return axios.post(baseUrl, nameObject)
 }
 
-export default { getAll, create }
+const deleteOne = (id) => {
+    const url = baseUrl + "/" + id
+    return axios.delete(url)
+}
+
+export default { getAll, create, deleteOne }
