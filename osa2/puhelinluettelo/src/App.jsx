@@ -93,6 +93,7 @@ const App = () => {
         })
         .catch(error => {
           setErrorMessage(`Information ${deletedOne.name} has already been removed from server`)
+          setPersons(persons.filter(person => person.name !== deletedOne.name))
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000)
@@ -136,6 +137,7 @@ const App = () => {
           })
           .catch(error => {
             setErrorMessage(`Information ${oldPerson.name} has already been removed from server`)
+            setPersons(persons.filter(person => person.name !== oldPerson.name))
             setTimeout(() => {
               setErrorMessage(null)
             }, 5000)
