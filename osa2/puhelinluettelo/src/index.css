@@ -53,10 +53,20 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-.error {
+.confirm {
   color: green;
   padding-top: 5px;
   background: lightgreen;
+  font-size: 15px;
+  border-style: solid;
+  padding: 10px;
+  margin-bottom: 10px
+}
+
+.error {
+  color: red;
+  padding-top: 5px;
+  background: lightcoral;
   font-size: 15px;
   border-style: solid;
   padding: 10px;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import personService from './services/persons'
 
-const Notification = ({ message }) => {
+const Notification = ({ message, messagetype }) => {
   if (message === null) {
     return null
   }
 
   return (
-    <div className='error'>
+    <div className={messagetype}>
       {message}
     </div>
   )
@@ -53,6 +53,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [confirmMessage, setConfirmMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
   const namesToShow = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
@@ -85,7 +86,13 @@ const App = () => {
         .then(response => {
           const newPersons = persons.filter(person => person.id !== id)
           setPersons(newPersons)
-          setErrorMessage(`${deletedOne.name} deleted successfully.`)
+          setConfirmMessage(`${deletedOne.name} deleted successfully.`)
+          setTimeout(() => {
+            setConfirmMessage(null)
+          }, 5000)
+        })
+        .catch(error => {
+          setErrorMessage(`Information ${deletedOne.name} has already been removed from server`)
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000)
@@ -103,9 +110,9 @@ const App = () => {
           setPersons(persons.concat(response.data))
           setNewName('')
           setNewNumber('')
-          setErrorMessage(`Added ${nameObject.name}`)
+          setConfirmMessage(`Added ${nameObject.name}`)
           setTimeout(() => {
-            setErrorMessage(null)
+            setConfirmMessage(null)
           }, 5000)
         })
     } else {
@@ -121,11 +128,17 @@ const App = () => {
               setPersons(response.data)
               setNewName('')
               setNewNumber('')
-              setErrorMessage(`Number changed succesfully for ${changedPerson.name}`)
+              setConfirmMessage(`Number changed succesfully for ${changedPerson.name}`)
               setTimeout(() => {
-                setErrorMessage(null)
+                setConfirmMessage(null)
               }, 5000)
             })
+          })
+          .catch(error => {
+            setErrorMessage(`Information ${oldPerson.name} has already been removed from server`)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
           })
       }
     }
@@ -134,7 +147,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage}/>
+      <Notification message={confirmMessage} messagetype={'confirm'}/>
+      <Notification message={errorMessage} messagetype={'error'}/>
       <FilterForm filter={filter} handleFilterChange={handleFilterChange} />
       <NewPersonForm 
         newName={newName} 
