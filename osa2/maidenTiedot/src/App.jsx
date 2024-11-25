@@ -3,7 +3,7 @@ import './App.css'
 import countryService from './services/country'
 
 const Matches = ({ matches, search, handleShow }) => {
-  if (search == '') {
+  if (search == '' | matches.length === 1) {
     return (
       null
     )
