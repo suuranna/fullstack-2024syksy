@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import countryService from './services/country'
 
-const Matches = ({ matches, search }) => {
+const Matches = ({ matches, search, handleShow }) => {
   if (search == '') {
     return (
       null
@@ -18,7 +18,10 @@ const Matches = ({ matches, search }) => {
   return (
     <div>
       {matches.map(country =>
-        <p key={country.common}>{country.common}</p>
+        <div key={country.common}>
+          {country.common} 
+          <button type='submit' onClick={(() => handleShow(country))}>show</button>
+        </div>
       )}
     </div>
   )
@@ -81,12 +84,20 @@ const App = () => {
     setSearch(event.target.value)
   }
 
+  const handleShow = (country) => {
+    countryService
+      .getCountry(country.common)
+      .then(response => {
+        setTheCountry(response.data)
+      })
+  }
+
     return (
       <>
         <div>
           <h1>Country search</h1>
           find countries <input value={search} onChange={handleSearch} />
-          <Matches matches={countriesToShow} search={search} />
+          <Matches matches={countriesToShow} search={search} handleShow={handleShow}/>
           <CountryInfo theCountry={theCountry} />
         </div>
       </>
