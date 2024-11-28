@@ -5,3 +5,6 @@
 
 1. osa:
 14 tehtävää tehty
+
+2. osa:
+19 tehtävää tehty
