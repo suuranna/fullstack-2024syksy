@@ -117,7 +117,6 @@ const App = () => {
           }, 5000)
         })
         .catch(error => {
-          console.log(error.response.data)
           setErrorMessage(error.response.data.error)
           setTimeout(() => {
             setErrorMessage(null)
@@ -143,11 +142,18 @@ const App = () => {
             })
           })
           .catch(error => {
-            setErrorMessage(`Information ${oldPerson.name} has already been removed from server`)
-            setPersons(persons.filter(person => person.name !== oldPerson.name))
-            setTimeout(() => {
-              setErrorMessage(null)
-            }, 5000)
+            if (error.response.data.error.includes("Validation failed:")) {
+              setErrorMessage(error.response.data.error)
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000)
+            } else {
+              setErrorMessage(`Information ${oldPerson.name} has already been removed from server`)
+              setPersons(persons.filter(person => person.name !== oldPerson.name))
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000)
+            }
           })
       }
     }
