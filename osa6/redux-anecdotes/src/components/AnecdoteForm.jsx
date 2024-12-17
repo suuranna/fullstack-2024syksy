@@ -11,7 +11,10 @@ const NewAnecdote = () => {
     event.target.content.value = ''
     //dispatch({ type: 'NEW_ANECDOTE', payload: content})
     dispatch(createAnecdote(content))
-    dispatch(setMessage('uusi anekdootti lisätty'))
+    dispatch(setMessage(`Anecdote '${content}' added`))
+    setTimeout(() => {
+      dispatch(setMessage(null))
+    }, 5000)
 
   }
 
