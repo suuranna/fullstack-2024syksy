@@ -31,9 +31,9 @@
       "votes": 0
     },
     {
-      "id": "b125",
       "content": "Yeetin teetin",
-      "votes": 0
+      "votes": 1,
+      "id": "b125"
     },
     {
       "id": "4790",
@@ -46,9 +46,9 @@
       "votes": 0
     },
     {
-      "id": "9d25",
       "content": "Less egos, more amigos",
-      "votes": 0
+      "votes": 3,
+      "id": "9d25"
     }
   ]
 }
