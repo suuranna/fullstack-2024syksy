@@ -1,17 +1,27 @@
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
 import axios from 'axios'
+import { getAnecdotes, createAnecdote } from './requests'
 
 const App = () => {
+  //const newAnecdoteMutation = useMutation({ mutationFn: createAnecdote })
 
   const handleVote = (anecdote) => {
     console.log('vote')
   }
 
+  /*const addAnecdote = async (event) => {
+    event.preventDefault()
+    const content = event.target.anecdote.value
+    event.target.anecdote.value = ''
+    newAnecdoteMutation.mutate({ content, votes: 0 })
+  }*/
+
   const result = useQuery({
     queryKey: ['anecdotes'],
-    queryFn: () => axios.get('http://localhost:3001/anecdotes').then(response => response.data),
+    //queryFn: () => axios.get('http://localhost:3001/anecdotes').then(response => response.data),
+    queryFn: getAnecdotes,
     retry: 2
   })
   //console.log(JSON.parse(JSON.stringify(result)))
