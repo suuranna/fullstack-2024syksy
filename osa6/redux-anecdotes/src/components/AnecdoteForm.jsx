@@ -11,9 +11,11 @@ const NewAnecdote = () => {
     const content = event.target.content.value
     event.target.content.value = ''
     //dispatch({ type: 'NEW_ANECDOTE', payload: content})
-    const newAnecdote = await anecdoteService.createNew(content)
-    console.log(newAnecdote)
-    dispatch(createAnecdote(newAnecdote))
+    //const newAnecdote = await anecdoteService.createNew(content)
+
+    //console.log(newAnecdote)
+    //dispatch(createAnecdote(newAnecdote))
+    dispatch(createAnecdote(content))
     dispatch(setMessage(`Anecdote '${content}' added`))
     setTimeout(() => {
       dispatch(setMessage(null))
