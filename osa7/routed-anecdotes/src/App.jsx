@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   BrowserRouter as Router,
-  Routes, Route, Link
+  Routes, Route, Link, useParams
 } from 'react-router-dom'
 
 const Menu = () => {
@@ -17,14 +17,32 @@ const Menu = () => {
   )
 }
 
-const AnecdoteList = ({ anecdotes }) => (
-  <div>
-    <h2>Anecdotes</h2>
-    <ul>
-      {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
-    </ul>
-  </div>
-)
+const AnecdoteList = ({ anecdotes }) => {
+  const padding = {
+    paddingRight: 5
+  }
+  return (
+    <div>
+      <h2>Anecdotes</h2>
+      <ul>
+        {anecdotes.map(anecdote => <li key={anecdote.id} > <Link style={padding} to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link> </li>)}
+      </ul>
+    </div>
+  )
+}
+
+const AnecdoteInfo = ({ anecdotes }) => {
+  const id = useParams().id
+  const anecdote = anecdotes.find(anecdote => anecdote.id === Number(id))
+  console.log(anecdote)
+  return (
+    <div>
+      <h2>{anecdote.content}</h2>
+      <p>has {anecdote.votes} votes</p>
+      <p>for more info see <Link to={anecdote.info}>{anecdote.info}</Link> </p>
+    </div>
+  )
+}
 
 const About = () => (
   <div>
@@ -132,6 +150,7 @@ const App = () => {
         <h1>Software anecdotes</h1>
         <Menu />
         <Routes>
+          <Route path='/anecdotes/:id' element={<AnecdoteInfo anecdotes={anecdotes} />} />
           <Route path='/about' element={<About/>} />
           <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
           <Route path='/create' element={<CreateNew addNew={addNew}/>} />
