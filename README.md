@@ -25,3 +25,7 @@
 23 tehtävää tehty
    
 7. osa:
+19 tehtävää tehty
+Tehtävät 7.1 -7.8 löytyy tästä reposta. Loput tehtävät (7.9-7.19) löytyvät blogilistasovelluksen repoista.
+Blogilistasovelluksen frontendin repo löytyy [täältä.](https://github.com/suuranna/fullstack-2024s-osa5)
+Blogilistasovelluksen backendin repo löytyy [täältä.](https://github.com/suuranna/fullstack-2024s-osa4)
